@@ -34,8 +34,6 @@
 
     <!-- BARRA Y BOTÓN DE BUSQUEDA -->
 
-    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" id="barraBusqueda">
-    <button class="btn btn-outline-dark " id="botonBuscar" type="submit">Buscar</button>
 
 
     <div id="content">
@@ -193,6 +191,32 @@
                         left: 950px;
                     }
                 </style>
+
+
+                <!-- FORMULARIO PARA LA BUSQUEDA -->
+
+                <form action="servicios.php" method="get">
+                        <!-- INPUT Y BOTÓN DE BUSQUEDA -->
+
+                    <input class="form-control me-2" type="search" name="busqueda" placeholder="Buscar" aria-label="Search" id="barraBusqueda">
+                    <button class="btn btn-outline-dark" name="buscar" id="botonBuscar" type="submit">Buscar</button>
+
+                </form>
+
+                <?php
+                if(isset($_GET['buscar'])){
+                    $busqueda = $_GET['busqueda'];
+
+                    $consulta = $conn->query("SELECT * FROM servicios WHERE nombre_servicio LIKE '%$busqueda%'");
+                    while($row= $consulta-> fetch_array()){
+                        echo $row['nombre_servicio'].'<br>';
+                    }
+                }
+
+
+                ?>
+
+                
 
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
